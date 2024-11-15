@@ -8,13 +8,14 @@ function Homepage() {
   const [error, setError] = useState(null);
   const [drinkImage, setDrinkImage] = useState(null)
 
+  const apiUrl = "https://royal-corey-asaa12-5522f444.koyeb.app"
 
   const handleImage = async () => {
             setLoading(true); // 이미지 로딩 시작
             setError(null); // 이전 오류 초기화
             setDrinkImage(null)
     try {
-      const response = await fetch("http://localhost:4001/home_image");
+      const response = await fetch(`${apiUrl}/home_image`);
       if (!response.ok) {
         throw new Error("Failed to fetch image data");
       }

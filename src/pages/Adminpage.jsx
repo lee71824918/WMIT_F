@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Adminpage() {
 
+  const apiUrl = "https://royal-corey-asaa12-5522f444.koyeb.app"
   const navigate = useNavigate();
 
    useEffect(() => {
@@ -33,7 +34,7 @@ function Adminpage() {
       formData.append("image", image); // 선택된 이미지 파일을 FormData에 추가
 
       // fetch API를 사용하여 파일 전송
-      fetch("http://localhost:4001/upload", {
+      fetch(`${apiUrl}/upload`, {
         method: "POST",
         body: formData, // FormData를 그대로 body에 전달
       })
