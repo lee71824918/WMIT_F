@@ -19,9 +19,12 @@ function Homepage() {
       if (!response.ok) {
         throw new Error("Failed to fetch image data");
       }
-      const data = await response.json();
-      console.log(data);
-      setImage(data); // API로부터 받은 데이터 저장
+      const imageBlob = await response.blob();
+
+       // Blob을 URL로 변환 (브라우저에서 이미지로 표시할 수 있는 URL)
+      const imageObjectURL = URL.createObjectURL(imageBlob);
+      console.log(imageObjectURL);
+      setImage(imageObjectURL); // API로부터 받은 데이터 저장
     } catch (error) {
       console.error("이미지 로딩 실패: ", error);
       alert("이미지 로딩 실패");
@@ -89,7 +92,7 @@ function Homepage() {
         {image && !loading && !error && (
           <Box mt={3}>
             <img
-              src={image.image_url} // 서버에서 반환한 이미지 경로
+              src={image} // 서버에서 반환한 이미지 경로
               alt="메뉴 이미지"
               style={{ width: "100%", maxHeight: "70vh", objectFit: "fill" }} // 스타일링
             />
