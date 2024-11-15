@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button, Typography, Box, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { apiUrl } from "./config";
 
 function Adminpage() {
 
-  const apiUrl = "https://lovely-slug-asaa12-08e720ae.koyeb.app"
   const navigate = useNavigate();
 
    useEffect(() => {
@@ -28,33 +28,37 @@ function Adminpage() {
   };
 
   // 이미지 업로드 버튼 클릭 처리
-  const handleUpload = () => {
-    if (image) {
+  const handleUpload = async () => {
+      if (!image) {
+        alert("이미지를 선택하세요!");
+        return;
+      }
+
       const formData = new FormData();
       formData.append("image", image); // 선택된 이미지 파일을 FormData에 추가
-
-      // fetch API를 사용하여 파일 전송
-      fetch(`${apiUrl}/upload`, {
-        method: "POST",
-        body: formData, // FormData를 그대로 body에 전달
-      })
-        .then((response) => response.json()) // 응답을 JSON으로 처리
-        .then((data) => {
-          console.log("이미지 업로드 성공: ", data);
-          alert("이미지가 업로드되었습니다.");
-
-          // 서버에서 반환된 이미지 URL을 localStorage에 저장
-          const uploadedImageUrl = data.imageUrl;
-          localStorage.setItem("uploadedImageUrl", uploadedImageUrl);
-          setImageUrl(uploadedImageUrl); // 상태에 저장
+      
+    // fetch API를 사용하여 파일 전송
+      try {
+        const response = await fetch(`${apiUrl}/upload`,{
+          method: "POST",
+          body: formData,
         })
-        .catch((error) => {
-          console.error("이미지 업로드 실패: ", error);
-          alert("이미지 업로드 실패");
-        });
-    } else {
-      alert("이미지를 선택하세요.");
-    }
+
+        if(!response.ok) {
+          throw new Error("failed to fetch image")
+        }
+
+        const imageBlob = await response.blob()
+
+         // 이미지 Blob을 URL로 변환 (브라우저에서 이미지로 표시할 수 있는 URL)
+        const uploadedImageUrl = URL.createObjectURL(imageBlob);
+        console.log(uploadedImageUrl);
+        setImageUrl(uploadedImageUrl); // 받은 이미지 파일에 대해 생성한 url을 저장
+        alert("이미지가 업로드되었습니다.")
+      } catch(error){
+          console.error("이미지 업로드실패", error)
+          alert("이미지 업로드 실패")
+        }
   };
 
   return (

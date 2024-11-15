@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Typography, Box, Container } from "@mui/material";
+import { apiUrl } from "./config";
 
 function Homepage() {
 
@@ -7,8 +8,6 @@ function Homepage() {
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [error, setError] = useState(null);
   const [drinkImage, setDrinkImage] = useState(null)
-
-  const apiUrl = "https://lovely-slug-asaa12-08e720ae.koyeb.app"
 
   const handleImage = async () => {
             setLoading(true); // 이미지 로딩 시작
@@ -24,7 +23,7 @@ function Homepage() {
        // Blob을 URL로 변환 (브라우저에서 이미지로 표시할 수 있는 URL)
       const imageObjectURL = URL.createObjectURL(imageBlob);
       console.log(imageObjectURL);
-      setImage(imageObjectURL); // API로부터 받은 데이터 저장
+      setImage(imageObjectURL); // 받은이미지 파일에대해 url 생성후 저장
     } catch (error) {
       console.error("이미지 로딩 실패: ", error);
       alert("이미지 로딩 실패");
