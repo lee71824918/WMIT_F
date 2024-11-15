@@ -8,7 +8,7 @@ function Homepage() {
   const [error, setError] = useState(null);
   const [drinkImage, setDrinkImage] = useState(null)
 
-  const apiUrl = "https://royal-corey-asaa12-5522f444.koyeb.app"
+  const apiUrl = "https://lovely-slug-asaa12-08e720ae.koyeb.app"
 
   const handleImage = async () => {
             setLoading(true); // 이미지 로딩 시작

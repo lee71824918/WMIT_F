@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Adminpage() {
 
-  const apiUrl = "https://royal-corey-asaa12-5522f444.koyeb.app"
+  const apiUrl = "https://lovely-slug-asaa12-08e720ae.koyeb.app"
   const navigate = useNavigate();
 
    useEffect(() => {
