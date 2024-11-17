@@ -7,7 +7,7 @@ function Adminpage() {
 
   const navigate = useNavigate();
 
-   useEffect(() => {
+  useEffect(() => {
     const token = sessionStorage.getItem('authToken');
 
     // 토큰이 없으면 로그인 페이지로 리다이렉트
@@ -34,7 +34,7 @@ function Adminpage() {
         return;
       }
 
-      const formData = new FormData();
+      const formData = new FormData(); // 키-값 파일 텍스트 등을 포함한 데이터를 보낼수있음
       formData.append("image", image); // 선택된 이미지 파일을 FormData에 추가
       
     // fetch API를 사용하여 파일 전송
@@ -48,7 +48,7 @@ function Adminpage() {
           throw new Error("failed to fetch image")
         }
 
-        const imageBlob = await response.blob()
+        const imageBlob = await response.blob()  //이미지와 같은 이진 데이터를 다룰 때는 Blob이 유용
 
          // 이미지 Blob을 URL로 변환 (브라우저에서 이미지로 표시할 수 있는 URL)
         const uploadedImageUrl = URL.createObjectURL(imageBlob);
@@ -81,7 +81,7 @@ function Adminpage() {
 
         <input
           type="file"
-          accept="image/*"
+          accept="image/*"   // 이미지파일형식만 
           onChange={Imagechange}
           style={{ marginBottom: "20px" }}
         />

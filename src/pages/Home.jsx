@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Typography, Box, Container } from "@mui/material";
 import { apiUrl } from "./config";
 
@@ -9,6 +9,12 @@ function Homepage() {
   const [error, setError] = useState(null);
   const [drinkImage, setDrinkImage] = useState(null)
 
+  useEffect(() => {
+    handleImage();
+  }, []);  // 홈페이지 렌더링시에 식당메뉴버튼의 api 자동호출
+
+
+  //식당 메뉴 버튼 클릭시 이미지 불러오기
   const handleImage = async () => {
             setLoading(true); // 이미지 로딩 시작
             setError(null); // 이전 오류 초기화
@@ -33,7 +39,7 @@ function Homepage() {
   };
 
 
-
+  // 음료이미지 버튼 클릭시 하드코딩된 이미지 출력
   const handleDrink = () => {
     setDrinkImage("logo192.png")
     setImage(null)

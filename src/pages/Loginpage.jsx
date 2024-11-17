@@ -5,33 +5,33 @@ import { TextField, Button, Typography, Container, Box } from '@mui/material'
 
 function Loginpage () {
 
-    const [id, setId] = useState('')    
-    const [password, setPassword] = useState('')
-    const navigate = useNavigate()
+  const [id, setId] = useState('')    
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
-    const Login = async (e) => {
-        e.preventDefault()
+  const Login = async (e) => {
+    e.preventDefault()
     
 
     if (id === 'admin' || password === 'grit!234' ) {
-        alert('관리자 로그인성공')
-        
-        const token = 'rhksflwkvpdlwl'
-        sessionStorage.setItem('authToken',token)
-        
-        navigate('/Admin')
+      alert('관리자 로그인성공')
+          
+      const token = 'rhksflwkvpdlwl'
+      sessionStorage.setItem('authToken',token)
+          
+      navigate('/Admin')
     }
     else if(id !== 'adim' || password !== 'grit!234'){
-        alert('id 또는 password가 잘못되었습니다.')
+      alert('id 또는 password가 잘못되었습니다.')
     }
     else{
-        alert('로그인 에러')
+      alert('로그인 에러')
     }
-   }
+  }
 
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container maxWidth="xs">
         <Box
           sx={{
             display: 'flex',
