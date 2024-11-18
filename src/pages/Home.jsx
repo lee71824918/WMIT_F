@@ -8,6 +8,7 @@ function Homepage() {
   const [loading, setLoading] = useState(false); // 로딩 상태
   const [error, setError] = useState(null);
   const [drinkImage, setDrinkImage] = useState(null)
+  const [imagetime, setImagetime] = useState(null)
 
   useEffect(() => {
     handleImage();
@@ -24,12 +25,27 @@ function Homepage() {
       if (!response.ok) {
         throw new Error("Failed to fetch image data");
       }
+
       const imageBlob = await response.blob();
 
        // Blob을 URL로 변환 (브라우저에서 이미지로 표시할 수 있는 URL)
       const imageObjectURL = URL.createObjectURL(imageBlob);
       console.log(imageObjectURL);
       setImage(imageObjectURL); // 받은이미지 파일에대해 url 생성후 저장
+
+
+
+
+      // 시간 가져오기 위한 api 호출
+      const response2 = await fetch(`${apiUrl}/time`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch image data");
+      }
+
+      const uploadimagetime = await response2.text()
+      console.log(uploadimagetime)
+      setImagetime(uploadimagetime)
+
     } catch (error) {
       console.error("이미지 로딩 실패: ", error);
       alert("이미지 로딩 실패");
@@ -37,6 +53,8 @@ function Homepage() {
       setLoading(false); // 로딩 상태 종료
     }
   };
+
+
 
 
   // 음료이미지 버튼 클릭시 하드코딩된 이미지 출력
@@ -99,10 +117,10 @@ function Homepage() {
             <img
               src={image} // 서버에서 반환한 이미지 경로
               alt="메뉴 이미지"
-              style={{ width: "100%", maxHeight: "70vh", objectFit: "fill" }} // 스타일링
+              style={{ width: "100%", maxHeight: "70vh", objectFit: "contain" }} // 스타일링
             />
             <Typography variant="body2" color="textSecondary" mt={3}>
-              Timestamp: {new Date(image.timestamp).toLocaleString()}
+              Timestamp: {imagetime}
             </Typography>
           </Box>
         )}
@@ -116,7 +134,7 @@ function Homepage() {
               style={{
                 width: "100%",
                 maxHeight: "70vh",
-                objectFit: "fill", // 이미지 크기 조정
+                objectFit: "contain", // 이미지 크기 조정
               }}
             />
           </Box>
