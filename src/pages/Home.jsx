@@ -41,7 +41,7 @@ function Homepage() {
 
   // 음료이미지 버튼 클릭시 하드코딩된 이미지 출력
   const handleDrink = () => {
-    setDrinkImage("logo192.png")
+    setDrinkImage("drink.jpg")
     setImage(null)
   }
 
@@ -49,14 +49,14 @@ function Homepage() {
 
   return (
     <Container maxWidth="lg">
-      <Box textAlign="center" mt={5}>
+      <Box textAlign="center" mt={3}>
         <Typography variant="h4" gutterBottom sx={{
             fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" }, // 반응형 폰트 크기
           }}>
           WMIT FOOD & DRINK!
         </Typography>
 
-        <Box mb={2}>
+        <Box mb={2} mt={3}>
           
           {/* 두 버튼을 한 줄에 배치하기 위한 Box */}
           <Button
